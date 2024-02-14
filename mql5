@@ -1,0 +1,61 @@
+
+//+------------------------------------------------------------------+
+//|                                         FRB Support and Resistance|
+//|            https://forexroboteasy.com               |
+//|                                         Forex Robot Easy Team |
+//+------------------------------------------------------------------+
+#property strict
+
+input ENUM_TIMEFRAMES Timeframe = PERIOD_H1; // Select the desired timeframe
+input color SupportLineColor = clrGreen; // Customize the support line color
+input color ResistanceLineColor = clrRed; // Customize the resistance line color
+input int LineThickness = 2; // Customize the line thickness
+
+//+------------------------------------------------------------------+
+//| Custom indicator initialization function                         |
+//+------------------------------------------------------------------+
+int OnInit()
+{
+   // Calculate support and resistance zones based on critical points
+   // ...
+
+   // Visualize support and resistance zones
+   DrawSupportResistanceZones();
+
+   return(INIT_SUCCEEDED);
+}
+
+//+------------------------------------------------------------------+
+//| Custom indicator iteration function                              |
+//+------------------------------------------------------------------+
+int OnCalculate(const int rates_total,
+                const int prev_calculated,
+                const datetime& time[],
+                const double& open[],
+                const double& high[],
+                const double& low[],
+                const double& close[],
+                const long& tick_volume[],
+                const long& volume[],
+                const int& spread[])
+{
+   // Calculations for support and resistance zones
+   // ...
+
+   return(rates_total);
+}
+
+//+------------------------------------------------------------------+
+//| Function to draw support and resistance zones                      |
+//+------------------------------------------------------------------+
+void DrawSupportResistanceZones()
+{
+   // Draw lines for support and resistance zones
+   ObjectCreate(0, 'SupportLine', OBJ_TREND, 0, Time[0], Low[0], Time[Bars - 1], Low[Bars - 1]);
+   ObjectSet('SupportLine', OBJPROP_COLOR, SupportLineColor);
+   ObjectSet('SupportLine', OBJPROP_WIDTH, LineThickness);
+   
+   ObjectCreate(0, 'ResistanceLine', OBJ_TREND, 0, Time[0], High[0], Time[Bars - 1], High[Bars - 1]);
+   ObjectSet('ResistanceLine', OBJPROP_COLOR, ResistanceLineColor);
+   ObjectSet('ResistanceLine', OBJPROP_WIDTH, LineThickness);
+}
